@@ -30,12 +30,55 @@ function start() {
   // // TODO: Add event-listeners to filter and sort buttons
   registerButtons();
 
-  loadJSON();
+
+  loadFamilies();
+  console.log("Loading families");
+  loadStudents();
+  console.log("Loading students");
 }
 
+// Adding eventlisteners on buttons
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+}
+
+
+// LOADING STUDENTS
+async function loadStudents() {
+  const url = "https://petlatkea.dk/2021/hogwarts/students.json";
+  const data = await fetch(url);
+  const students = await data.json();
+
+  // when loaded, prepare data objects
+  prepareObjects(students);
+};
+
+// LOADING FAMILIES
+async function loadFamilies() {
+  const url2 = "https://petlatkea.dk/2021/hogwarts/families.json";
+  const data = await fetch(url2);
+  const students = await data.json();
+};
+
+function prepareObjects(students) {
+  allStudents = students.map(preapareObject);
+
+  buildList();
+  // nedestående udkommenteret grundet buildlist function skal indlæses først
+  // displayList(allAnimals);
+};
+
+function preapareObject(jsonObject) {
+  const student = Object.create(Student);
+
+  const texts = jsonObject.fullname.split(" ");
+  student.name = texts[0];
+  student.desc = texts[2];
+  student.type = texts[3];
+  student.age = jsonObject.age;
+
+  return student;
 }
 
 // filter allStudents with the correct filter function and put info filterAnimals
@@ -160,36 +203,6 @@ function all() {
   return true;
 }
 // -------------------------------------------------------
-
-async function loadJSON() {
-  const url = "https://petlatkea.dk/2021/hogwarts/students.json";
-  const data = await fetch(url);
-  const students = await data.json();
-
-  // when loaded, prepare data objects
-  prepareObjects(students);
-};
-
-function prepareObjects(students) {
-  allStudents = students.map(preapareObject);
-
-  buildList();
-  // nedestående udkommenteret grundet buildlist function skal indlæses først
-  // displayList(allAnimals);
-};
-
-function preapareObject(jsonObject) {
-  const student = Object.create(Student);
-
-  const texts = jsonObject.fullname.split(" ");
-  student.name = texts[0];
-  student.desc = texts[2];
-  student.type = texts[3];
-  student.age = jsonObject.age;
-
-  return student;
-}
-
 
 function displayList(students) {
   // clear the list
