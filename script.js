@@ -6,8 +6,8 @@ let allStudents = [];
 
 // The prototype for all animals: // the model
 const Student = {
-  winner: false, 
-  prefect: false,
+  prefect: false, 
+  inquisitorial: false,
   firstName: "",
   lastName: "",
   middleName: "",
@@ -30,11 +30,8 @@ function start() {
   // // TODO: Add event-listeners to filter and sort buttons
   registerButtons();
 
-
   loadFamilies();
-  console.log("Loading families");
   loadStudents();
-  console.log("Loading students");
 }
 
 // Adding eventlisteners on buttons
@@ -73,11 +70,10 @@ function preapareObject(jsonObject) {
   const student = Object.create(Student);
 
   const texts = jsonObject.fullname.split(" ");
-  student.name = texts[0];
-  student.desc = texts[2];
-  student.type = texts[3];
-  student.age = jsonObject.age;
-
+  student.firstName = texts[0];
+  student.lastName = texts[2];
+  student.house = texts[3];
+  // console.table(student)
   return student;
 }
 
@@ -218,40 +214,40 @@ function displayStudent(student) {
   // create clone
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
-  // let startButtons = document.querySelectorAll("[data-field='prefect']").forEach((button) => button.addEventListener("click", selectPrefect));
+  // let startButtons = document.querySelectorAll("[data-field='inquisitorial']").forEach((button) => button.addEventListener("click", selectInquisitorial));
 
   // set clone data
 
   clone.querySelector("[data-field=firstname]").textContent = student.firstname;
   clone.querySelector("[data-field=lastname]").textContent = student.lastname;
   clone.querySelector("[data-field=house]").textContent = student.house;
-  if (student.prefect === true) {
-    clone.querySelector("[data-field=prefect]").textContent = "⭐";
+  if (student.inquisitorial === true) {
+    clone.querySelector("[data-field=inquisitorial]").textContent = "⭐";
   } else {
-    clone.querySelector("[data-field=prefect]").textContent = "☆";
+    clone.querySelector("[data-field=inquisitorial]").textContent = "☆";
   }
-  // Make prefect clickable
-  clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
+  // Make inquisitorial clickable
+  clone.querySelector("[data-field=inquisitorial]").addEventListener("click", clickInquisitorial);
 
   // append clone to list
-  function clickPrefect() {
-    // console.log("prefect clicked");
-    if (student.prefect === true ) {
-      student.prefect = false;
+  function clickInquisitorial() {
+    // console.log("inquisitorial clicked");
+    if (student.inquisitorial === true ) {
+      student.inquisitorial = false;
     } else {
-      student.prefect = true;
+      student.inquisitorial = true;
     }
     buildList();
   }
 
-  // winner
-  clone.querySelector("[data-field=winner]").dataset.winner = student.winner;
-  clone.querySelector("[data-field=winner]").addEventListener("click", clickWinner);
-  function clickWinner(){
-    if(student.winner === true){
-      student.winner = false;
+  // prefect
+  clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
+  clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
+  function clickPrefect(){
+    if(student.prefect === true){
+      student.prefect = false;
     } else {
-      tryToMakeWinner(student);
+      tryToMakePrefect(student);
     }
     buildList();
   }
@@ -267,21 +263,21 @@ function buildList() {
   displayList(sortedList);
 }
 
-function tryToMakeWinner(selectedStudent){
-  const winners = allStudents.filter(student => student.winner);
+function tryToMakePrefect(selectedStudent){
+  const prefects = allStudents.filter(student => student.prefect);
   
 
-  const numberOfWinners = winners.length;
-  const other = winners.filter(student => student.house === selectedStudent.house).shift();
+  const numberOfPrefect = prefects.length;
+  const other = prefects.filter(student => student.house === selectedStudent.house).shift();
 
   if(other !== undefined){
-    console.log("There can only be one winner of each house!");
+    console.log("There can only be one prefect of each house!");
     removeOther(other);
-  } else if (numberOfWinners >= 2){
-    console.log("There can only be two winner")
-    removeAorB(winners[0], winners[1]);
+  } else if (numberOfPrefect >= 2){
+    console.log("There can only be two prefects")
+    removeAorB(prefects[0], prefects[1]);
   } else {
-    makeWinner(selectedStudent);
+    makePrefect(selectedStudent);
   }
 
   function removeOther(other){
@@ -291,7 +287,7 @@ function tryToMakeWinner(selectedStudent){
     document.querySelector("#remove_other #removeother").addEventListener("click", clickRemoveOther);
 
     // Show names on other
-    document.querySelector("#remove_other [data-field=otherwinner]").textContent = other.firstname;
+    document.querySelector("#remove_other [data-field=otherprefect]").textContent = other.firstname;
     
       // if ignore - do nothing
     function closeDialog(){
@@ -301,19 +297,19 @@ function tryToMakeWinner(selectedStudent){
     }
 
     function clickRemoveOther(){
-    removeWinner(other);
-    makeWinner(selectedStudent);
+    removePrefect(other);
+    makePrefect(selectedStudent);
     buildList();
     closeDialog();
     }
    
 
     // if remove other:
-    removeWinner(other);
-    makeWinner(selectedStudent);
+    removePrefect(other);
+    makePrefect(selectedStudent);
 
   }
-  function removeAorB(winnerA, winnerB){
+  function removeAorB(prefectA, prefectB){
     // ask the user to ignore, or remove A or B
     document.querySelector("#remove_aorb").classList.remove("hide");
     document.querySelector("#remove_aorb .closebutton").addEventListener("click", closeDialog);
@@ -321,8 +317,8 @@ function tryToMakeWinner(selectedStudent){
     document.querySelector("#remove_aorb #removeb").addEventListener("click", clickRemoveB);
     
     //show names on buttons
-    document.querySelector("#remove_aorb [data-field=winnerA]").textContent = winnerA.firstname;
-    document.querySelector("#remove_aorb [data-field=winnerB]").textContent = winnerB.firstname;
+    document.querySelector("#remove_aorb [data-field=prefectA]").textContent = prefectA.firstname;
+    document.querySelector("#remove_aorb [data-field=prefectB]").textContent = prefectB.firstname;
 
     // if ignore - do nothing
     function closeDialog(){
@@ -335,22 +331,22 @@ function tryToMakeWinner(selectedStudent){
 
     // if removeA: 
     function clickRemoveA(){
-      removeWinner(winnerA);
-      makeWinner(selectedStudent);
+      removePrefect(prefectA);
+      makePrefect(selectedStudent);
     }
 
     // if removeB: 
     function clickRemoveB(){
-      removeWinner(winnerB);
-      makeWinner(selectedStudent);
+      removePrefect(prefectB);
+      makePrefect(selectedStudent);
     }
     }
 
-  function removeWinner(winnerAnimal){
-    student.winner = false;
+  function removePrefect(prefectAnimal){
+    student.prefect = false;
 
   }
-  function makeWinner(student){
-    student.winner = true;
+  function makePrefect(student){
+    student.prefect = true;
   }
 }
