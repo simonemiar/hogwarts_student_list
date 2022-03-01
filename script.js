@@ -4,17 +4,6 @@ window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
 
-// The prototype for all animals: // the model
-const Student = {
-  prefect: false, 
-  inquisitorial: false,
-  firstName: "",
-  lastName: "",
-  middleName: "",
-  nickName: "",
-  image: "",
-  house: "",
-};
 
 const settings = {
   filterBy: "all",
@@ -38,6 +27,8 @@ function start() {
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+  // READ MORE KNAP VIRKER IKKE
+  // document.querySelectorAll("button.readmore").forEach((button) => button.addEventListener("click", selectReadMore));
 }
 
 
@@ -60,22 +51,82 @@ async function loadFamilies() {
 
 function prepareObjects(students) {
   allStudents = students.map(preapareObject);
-
   buildList();
-  // nedestående udkommenteret grundet buildlist function skal indlæses først
-  // displayList(allAnimals);
+
 };
 
-function preapareObject(jsonObject) {
+function preapareObject(object) {
+  // The prototype for all animals: // the model
+  const Student = {
+    prefect: false, 
+    inquisitorial: false,
+    firstname: "",
+    lastname: "",
+    middlename: "",
+    nickName: "",
+    image: "",
+    house: "",
+  };
+
   const student = Object.create(Student);
 
-  const texts = jsonObject.fullname.split(" ");
-  student.firstName = texts[0];
-  student.lastName = texts[2];
-  student.house = texts[3];
-  // console.table(student)
+  // THE TRIMMING
+  let originalName = object.fullname.trim();
+
+  // THE FIRST NAME
+  if (originalName.includes(" ")) {
+    student.firstName = originalName.substring(0, 1).toUpperCase() + originalName.substring(1, originalName.indexOf(" "));
+  } else {
+    student.firstName = originalName.substring(0, 1).toUpperCase() + originalName.substring(1);
+  }
+  //changing to upper and lowercase
+  student.firstName = student.firstName.substring(0, 1).toUpperCase() + student.firstName.substring(1).toLowerCase();
+
+  // THE LAST NAME
+  // Find last name in string
+  if (originalName.includes(" ")) {
+    student.lastName = originalName.substring(originalName.lastIndexOf(" ") + 1);
+    //changing to upper and lowercase
+    student.lastName = student.lastName.substring(0, 1).toUpperCase() + student.lastName.substring(1).toLowerCase();
+  }
+
+  // THE MIDDLENAME
+  // Find the middle name (if any)
+  student.middleName = originalName.substring(originalName.indexOf(" ") + 1, originalName.lastIndexOf(" "));
+  student.middleName = student.middleName.substring(0, 1).toUpperCase() + student.middleName.substring(1).toLowerCase();
+
+  // NICKNAME
+  // Find the nick name (if any)
+  if (originalName.includes('"')) {
+    student.middleName = "";
+    student.nickName = originalName.substring(originalName.indexOf('"') + 1, originalName.lastIndexOf('"'));
+  }
+  // THE IMAGE
+  let pic = new Image();
+  pic.scr = "images/" + student.lastName + ".png";
+  student.image = pic.scr;
+
+  // THE HOUSE
+  //Trim objects
+  let originalHouse = object.house.trim();
+  //Find the name of the house
+  student.house = originalHouse;
+  //Changing to upper and lowercase
+  student.house = student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
+  
+  // console.log(student);
   return student;
+
 }
+
+function selectReadMore(event) {
+  console.log("detaljer");
+  const popup = document.querySelector("#popup");
+  popup.style.display = "block";
+  popup.querySelector(".actor_name").textContent = "Actor: " + actor.fullname;
+  popup.querySelector(".movie_name").textContent = "Movie: " + actor.movie; 
+}
+
 
 // filter allStudents with the correct filter function and put info filterAnimals
 function selectFilter(event) {
@@ -203,7 +254,6 @@ function all() {
 function displayList(students) {
   // clear the list
   document.querySelector("#list tbody").innerHTML = "";
-
   // build a new list
   students.forEach(displayStudent);
   // call the function which is filtering
@@ -302,7 +352,6 @@ function tryToMakePrefect(selectedStudent){
     buildList();
     closeDialog();
     }
-   
 
     // if remove other:
     removePrefect(other);
@@ -326,7 +375,6 @@ function tryToMakePrefect(selectedStudent){
       document.querySelector("#remove_aorb .closebutton").removeEventListener("click", closeDialog);
       document.querySelector("#remove_aorb #removea").removeEventListener("click", clickRemoveA);
       document.querySelector("#remove_aorb #removeb").removeEventListener("click", clickRemoveB);
-      
     }
 
     // if removeA: 
