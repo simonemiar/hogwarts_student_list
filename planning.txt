@@ -1,0 +1,28 @@
+01.03.2022 TO DO TO DAY: 
+
+SEARCH:
+- Insert search in displayStudent - done
+- Insert functionality - done
+
+POPUP:
+- popup button working - done 
+- popup styling 
+- popup load in data 
+- popup load in image 
+- 
+
+FILTER ON STATUS AND BLOOD:
+- popup button working - done 
+- popup styling 
+- popup load in data 
+- popup load in image 
+- 
+
+HackTheSystem: 
+add one flag to your own name. student object to your array
+if the hacker value is there and then you should know. 
+use push to add yourself as a student 
+the system needs to know its hacked: sovle this by a global flag that says system is hacked = true 
+inquisitorial squard: when button clicked - if flag is up, then we add timer that removes the inquisitorial property of object and turn it into false 
+the bloodstatus is no longer trustworthy: iterate throught the whole bloodstatus by a loop, if pure blood we make a math random from an array and index of array 
+

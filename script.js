@@ -27,8 +27,6 @@ function registerButtons() {
     document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
     document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
     document.querySelector("#search").addEventListener("input", searchFieldInput);
-    // READ MORE KNAP VIRKER IKKE
-    // document.querySelectorAll("button.readmore").forEach((button) => button.addEventListener("click", selectReadMore));
 }
   
   
@@ -46,9 +44,9 @@ async function loadStudents() {
 // LOADING FAMILIES
 async function loadFamilies() {
     console.log("loading families")
-    // const url2 = "https://petlatkea.dk/2021/hogwarts/families.json";
-    // const data = await fetch(url2);
-    // const familie = await data.json();
+    const url2 = "https://petlatkea.dk/2021/hogwarts/families.json";
+    const data = await fetch(url2);
+    const familie = await data.json();
 
 };
 
@@ -61,6 +59,7 @@ function preapareObject(object) {
   //  allStudents.forEach((object) => {
   // Define a template for the data objects
   const Student = {
+    inquisitorial: false, 
     prefect: false,
     firstName: "",
     lastName: "",
@@ -68,6 +67,7 @@ function preapareObject(object) {
     nickName: "",
     image: "",
     house: "",
+    
   };
   // create a objects from a prototype
   const student = Object.create(Student);
@@ -119,10 +119,6 @@ function preapareObject(object) {
   return student;
 }
 
-// POPUP DETALJER
-function selectReadMore(event) {
-    console.log("detaljer");
-  }
 
 //---------- THE SEARCH SITUATIONEN ----------
 function searchFieldInput(evt) {
@@ -181,7 +177,9 @@ function displayStudent(student) {
     }
     buildList();
   }
-
+  
+  // CLICK READ MORE BUTTON AND POPUP WILL APPEAR 
+  clone.querySelector("button#readmore").addEventListener("click", showdetails);
   document.querySelector("tbody").appendChild(clone);
 }
 
@@ -327,6 +325,7 @@ function tryToMakePrefect(selectedStudent){
     makePrefect(selectedStudent);
 
   }
+
   function removeAorB(prefectA, prefectB){
     // ask the user to ignore, or remove A or B
     document.querySelector("#remove_aorb").classList.remove("hide");
@@ -366,4 +365,25 @@ function tryToMakePrefect(selectedStudent){
   function makePrefect(student){
     student.prefect = true;
   }
+}
+
+// OPENING THE POPUP DETAILS
+function showdetails(studentDetails) {
+  console.log("detaljer");
+  const popup = document.querySelector("#popup");
+  popup.classList.remove("hide")
+  // popup.style.display = "block";
+  popup.querySelectorAll("#popup .Firstname").textContent = "Firstname: " + studentDetails.firstName;
+  popup.querySelectorAll("#popup .Nickname").textContent = "Nickname: " + studentDetails.nickName;
+  popup.querySelectorAll("#popup .Middlename").textContent = "Middlename: " + studentDetails.middleName;
+  popup.querySelectorAll("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
+  popup.querySelectorAll("#popup .House").textContent = "House: " + studentDetails.house;
+
+}
+
+// CLOSING THE POPUP DETAILS
+document.querySelector("#popup button").addEventListener("click", closePopup); 
+function closePopup() {
+  // document.querySelector("#popup").style.display = "none";
+  popup.classList.add("hide")
 }
