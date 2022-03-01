@@ -10,13 +10,8 @@ const settings = {
   sortDir: "asc",
 };
 
-// let filterBy = "all";
-
-
 function start() {
     console.log("ready");
-
-    // // TODO: Add event-listeners to filter and sort buttons
     registerButtons();
     loadFamilies();
     loadStudents();
@@ -146,7 +141,7 @@ function displayStudent(student) {
   clone.querySelector("[data-field=house]").textContent = student.house;
 
   // CLICK READ MORE BUTTON AND POPUP WILL APPEAR 
-  clone.querySelector("button#readmore").addEventListener("click", showdetails);
+  clone.querySelector("button#readmore").addEventListener("click", () => showdetails(student));
 
   // INQUISITORIAL SQUARD
   if (student.inquisitorial === true) {
@@ -282,7 +277,6 @@ function sortList(sortedList) {
 }
 
 
-//---------- THE TOGGLE SITUATIONEN ----------
 function tryToMakePrefect(selectedStudent){
   const prefects = allStudents.filter(student => student.prefect);
   const numberOfPrefect = prefects.length;
@@ -371,13 +365,14 @@ function tryToMakePrefect(selectedStudent){
 // OPENING THE POPUP DETAILS
 function showdetails(studentDetails) {
   console.log("detaljer");
-  const popup = document.querySelector("#popup");
-  popup.classList.remove("hide")
-  popup.querySelectorAll("#popup .Firstname").textContent = "Firstname: " + studentDetails.firstName;
-  popup.querySelectorAll("#popup .Nickname").textContent = "Nickname: " + studentDetails.nickName;
-  popup.querySelectorAll("#popup .Middlename").textContent = "Middlename: " + studentDetails.middleName;
-  popup.querySelectorAll("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
-  popup.querySelectorAll("#popup .House").textContent = "House: " + studentDetails.house;
+  document.querySelector("#popup").classList.remove("hide")
+  document.querySelector("#popup .Firstname").textContent = "Firstname: " + studentDetails.firstName;
+  document.querySelector("#popup .Nickname").textContent = "Nickname: " + studentDetails.nickName;
+  document.querySelector("#popup .Middlename").textContent = "Middlename: " + studentDetails.middleName;
+  document.querySelector("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
+  document.querySelector("#popup .House").textContent = "House: " + studentDetails.house;
+  document.querySelector(".studentImage").src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
+  document.querySelector(".houseCrest").src = `images/crest/${studentDetails.house}.png`;
 
   // CLICK EXPEL STUDENT BUTTON HERE
   popup.querySelector(".expelledBtn").addEventListener("click", expelledStudent);
