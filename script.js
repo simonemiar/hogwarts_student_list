@@ -145,6 +145,9 @@ function displayStudent(student) {
   clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
 
+  // CLICK READ MORE BUTTON AND POPUP WILL APPEAR 
+  clone.querySelector("button#readmore").addEventListener("click", showdetails);
+
   // INQUISITORIAL SQUARD
   if (student.inquisitorial === true) {
     clone.querySelector("[data-field=inquisitorial]").textContent = "⭐";
@@ -178,8 +181,6 @@ function displayStudent(student) {
     buildList();
   }
   
-  // CLICK READ MORE BUTTON AND POPUP WILL APPEAR 
-  clone.querySelector("button#readmore").addEventListener("click", showdetails);
   document.querySelector("tbody").appendChild(clone);
 }
 
@@ -372,12 +373,14 @@ function showdetails(studentDetails) {
   console.log("detaljer");
   const popup = document.querySelector("#popup");
   popup.classList.remove("hide")
-  // popup.style.display = "block";
   popup.querySelectorAll("#popup .Firstname").textContent = "Firstname: " + studentDetails.firstName;
   popup.querySelectorAll("#popup .Nickname").textContent = "Nickname: " + studentDetails.nickName;
   popup.querySelectorAll("#popup .Middlename").textContent = "Middlename: " + studentDetails.middleName;
   popup.querySelectorAll("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
   popup.querySelectorAll("#popup .House").textContent = "House: " + studentDetails.house;
+
+  // CLICK EXPEL STUDENT BUTTON HERE
+  popup.querySelector(".expelledBtn").addEventListener("click", expelledStudent);
 
 }
 
@@ -386,4 +389,9 @@ document.querySelector("#popup button").addEventListener("click", closePopup);
 function closePopup() {
   // document.querySelector("#popup").style.display = "none";
   popup.classList.add("hide")
+}
+
+//---------- THE EXPEL STUDENT SITUATION ----------   
+function expelledStudent(){
+  console.log("expelled works")
 }

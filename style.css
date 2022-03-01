@@ -54,12 +54,12 @@
   }
   
   
-  /* winner */
-  td[data-field=winner]::after{
+  /* prefect */
+  td[data-field=prefect]::after{
     content: "🏆";
   }
   
-  td[data-field=winner][data-field=true]::after{
+  td[data-field=prefect][data-field=true]::after{
     filter: grayscale(100%);
   }
   
@@ -105,21 +105,27 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 100vw;
-  height: 100vw;
+  /* width: 100vw;
+  height: 100vw; */
   background-color: rgba(104, 100, 100, 0.445);
   overflow: none;
 }
 
 #popup article {
+  width: 40vw;
+  height: 20vw;
   display: flex;
   flex-direction: column;
-  margin: 11rem auto;
   padding: 50px 0px 50px 0px;
   background-color:white;
   cursor: default;
   color: rgb(0, 0, 0);
 }
+
+#popup article p {
+  margin: 2px;
+}
+
 
 #popup .popupbtn {
   border: 1px solid black;
