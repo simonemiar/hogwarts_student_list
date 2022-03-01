@@ -37,6 +37,13 @@
   #list tbody tr:nth-child(even) td {
     border-right: rgb(176, 183, 185) 1px dotted;
   }
+
+  button {
+    border: 1px solid black;
+    padding: 10px 10px 10px 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(181, 183, 196);
+  }
   
   /* ****** STAR ****** */
   

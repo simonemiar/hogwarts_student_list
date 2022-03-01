@@ -4,273 +4,152 @@ window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
 
-
 const settings = {
   filterBy: "all",
-  sortBy: "firstname",
+  sortBy: "firstName",
   sortDir: "asc",
 };
 
 // let filterBy = "all";
 
+
 function start() {
-  console.log("ready");
+    console.log("ready");
 
-  // // TODO: Add event-listeners to filter and sort buttons
-  registerButtons();
-
-  loadFamilies();
-  loadStudents();
+    // // TODO: Add event-listeners to filter and sort buttons
+    registerButtons();
+    loadFamilies();
+    loadStudents();
 }
 
 // Adding eventlisteners on buttons
 function registerButtons() {
-  document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
-  document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
-  // READ MORE KNAP VIRKER IKKE
-  // document.querySelectorAll("button.readmore").forEach((button) => button.addEventListener("click", selectReadMore));
+    document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
+    document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+    document.querySelector("#search").addEventListener("input", searchFieldInput);
+    // READ MORE KNAP VIRKER IKKE
+    // document.querySelectorAll("button.readmore").forEach((button) => button.addEventListener("click", selectReadMore));
 }
-
-
+  
+  
 // LOADING STUDENTS
 async function loadStudents() {
-  const url = "https://petlatkea.dk/2021/hogwarts/students.json";
-  const data = await fetch(url);
-  const students = await data.json();
+    console.log("loading students")
+    const url = "https://petlatkea.dk/2021/hogwarts/students.json";
+    const data = await fetch(url);
+    const students = await data.json();
 
-  // when loaded, prepare data objects
-  prepareObjects(students);
+    // when loaded, prepare data objects
+    prepareObjects(students);
 };
 
 // LOADING FAMILIES
 async function loadFamilies() {
-  const url2 = "https://petlatkea.dk/2021/hogwarts/families.json";
-  const data = await fetch(url2);
-  const students = await data.json();
+    console.log("loading families")
+    // const url2 = "https://petlatkea.dk/2021/hogwarts/families.json";
+    // const data = await fetch(url2);
+    // const familie = await data.json();
+
 };
 
 function prepareObjects(students) {
   allStudents = students.map(preapareObject);
   buildList();
-
 };
 
 function preapareObject(object) {
-  // The prototype for all animals: // the model
+  //  allStudents.forEach((object) => {
+  // Define a template for the data objects
   const Student = {
-    prefect: false, 
-    inquisitorial: false,
-    firstname: "",
-    lastname: "",
-    middlename: "",
+    prefect: false,
+    firstName: "",
+    lastName: "",
+    middleName: "",
     nickName: "",
     image: "",
     house: "",
   };
-
+  // create a objects from a prototype
   const student = Object.create(Student);
 
-  // THE TRIMMING
+  //Trim objects
   let originalName = object.fullname.trim();
 
-  // THE FIRST NAME
+  // ----- First name -----
   if (originalName.includes(" ")) {
     student.firstName = originalName.substring(0, 1).toUpperCase() + originalName.substring(1, originalName.indexOf(" "));
   } else {
     student.firstName = originalName.substring(0, 1).toUpperCase() + originalName.substring(1);
   }
-  //changing to upper and lowercase
   student.firstName = student.firstName.substring(0, 1).toUpperCase() + student.firstName.substring(1).toLowerCase();
 
-  // THE LAST NAME
-  // Find last name in string
+  // ----- Last name -----
   if (originalName.includes(" ")) {
     student.lastName = originalName.substring(originalName.lastIndexOf(" ") + 1);
-    //changing to upper and lowercase
     student.lastName = student.lastName.substring(0, 1).toUpperCase() + student.lastName.substring(1).toLowerCase();
   }
 
-  // THE MIDDLENAME
-  // Find the middle name (if any)
+  //----- Middle name (if any) -----
   student.middleName = originalName.substring(originalName.indexOf(" ") + 1, originalName.lastIndexOf(" "));
   student.middleName = student.middleName.substring(0, 1).toUpperCase() + student.middleName.substring(1).toLowerCase();
 
-  // NICKNAME
-  // Find the nick name (if any)
+  //----- Nick name (if any) -----
   if (originalName.includes('"')) {
     student.middleName = "";
-    student.nickName = originalName.substring(originalName.indexOf('"') + 1, originalName.lastIndexOf('"'));
+    student.nickName = originalName.substring(originalName.indexOf('"'), originalName.lastIndexOf('"') + 1);
   }
-  // THE IMAGE
-  let pic = new Image();
-  pic.scr = "images/" + student.lastName + ".png";
-  student.image = pic.scr;
+  // // ----- Image -----
+  student.image = `./images/${originalName.substring(0, originalName.indexOf(" ")).toLowerCase()}_.png`;
+  student.image = `./images/${originalName.substring(originalName.lastIndexOf(" ") + 1, originalName.lastIndexOf(" ") + 2).toLowerCase() + originalName.substring(originalName.lastIndexOf(" ") + 2).toLowerCase()}_${originalName
+    .substring(0, 1)
+    .toUpperCase()
+    .toLowerCase()}.png`;
 
-  // THE HOUSE
-  //Trim objects
+  // ----- House -----
   let originalHouse = object.house.trim();
-  //Find the name of the house
   student.house = originalHouse;
-  //Changing to upper and lowercase
   student.house = student.house.substring(0, 1).toUpperCase() + student.house.substring(1).toLowerCase();
-  
-  // console.log(student);
+
+  // ----- Gender -----
+  let originalGender = object.gender.trim();
+  student.gender = originalGender;
+  student.gender = student.gender.substring(0, 1).toUpperCase() + student.gender.substring(1).toLowerCase();
+
+  // console.table(student);
   return student;
-
 }
 
+// POPUP DETALJER
 function selectReadMore(event) {
-  console.log("detaljer");
-  const popup = document.querySelector("#popup");
-  popup.style.display = "block";
-  popup.querySelector(".actor_name").textContent = "Actor: " + actor.fullname;
-  popup.querySelector(".movie_name").textContent = "Movie: " + actor.movie; 
-}
-
-
-// filter allStudents with the correct filter function and put info filterAnimals
-function selectFilter(event) {
-  const filter = event.target.dataset.filter;
-  // console.log(`user selected ${filter}`);
-  // filterList(filter);
-  setFilter(filter);
-}
-
-function setFilter(filter) {
-  settings.filterBy = filter;
-  buildList();
-}
-
-// sort allAnimals with the correct sort function and put info filterAnimals
-function selectSort(event) {
-  const sortBy = event.target.dataset.sort;
-  const sortDir = event.target.dataset.sortDirection;
-
-  // find "old" sortby element 
-  const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
-  oldElement.classList.remove("sortby");
-
-  // idicate active sort 
-  event.target.classList.add("sortby");
-  
-
-  //toggle the direction
-  if (sortDir === "asc") {
-    event.target.dataset.sortDirection = "desc";
-  } else {
-    event.target.dataset.sortDirection = "asc";
+    console.log("detaljer");
   }
 
-  console.log(`user selected ${sortBy} - ${sortDir}`);
-  setSort(sortBy, sortDir);
+//---------- THE SEARCH SITUATIONEN ----------
+function searchFieldInput(evt) {
+  // write to the list with only those elemnts in the allAnimals array that has properties containing the search frase
+  displayList(
+    allStudents.filter((elm) => {
+      // comparing in uppercase so that m is the same as M
+      return elm.firstName.toUpperCase().includes(evt.target.value.toUpperCase()) || elm.lastName.toUpperCase().includes(evt.target.value.toUpperCase()) || elm.house.toUpperCase().includes(evt.target.value.toUpperCase());
+    })
+  );
 }
 
-function setSort(sortBy, sortDir) {
-  settings.sortBy = sortBy;
-  settings.sortDir = sortDir;
-
-  buildList();
-}
-
-//---------- MODEL ----------
-// get filter depending on data-filter attribute
-function filterList(filteredList) {
-  // let filteredList = allAnimals;
-  if (settings.filterBy === "griffendor") {
-    filteredList = allStudents.filter(isGriffendor);
-  } else if (settings.filterBy === "slytherin") {
-    filteredList = allStudents.filter(isSlytherin);
-  } else if (settings.filterBy === "ravenclaw") {
-    filteredList = allStudents.filter(isRavenclaw);
-  } else if (settings.filterBy === "huffelpuf") {
-    filteredList = allStudents.filter(isHuffelpuf);
-  }
-  return filteredList;
-}
-
-function sortList(sortedList) {
-  let direction = 1;
-  if (settings.sortDir === "lastname") {
-    direction = -1;
-  } else {
-    settings.direction = 1;
-  }
-
-  sortedList = sortedList.sort(sortByProperty);
-
-  // closure
-  function sortByProperty(a, b) {
-    // console.log(`sortBy is ${sortBy}`);
-    if (a[settings.sortBy] < b[settings.sortBy]) {
-      return -1 * direction;
-    } else {
-      return 1 * direction;
-    }
-  }
-
-  return sortedList;
-}
-
-// isGriffendor function
-function isGriffendor(student) {
-  if (student.house === "griffendor") {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-// isSlytherin function
-function isSlytherin(student) {
-  if (student.house === "slytherin") {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function isRavenclaw(student){
-  if (student.house === "ravenclaw") {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function isHuffelpuf(student) {
-  if (student.house === "huffelpuf") {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-// all function
-function all() {
-  return true;
-}
-// -------------------------------------------------------
-
+//---------- THE DISPLAY SITUATIONEN ----------
 function displayList(students) {
-  // clear the list
-  document.querySelector("#list tbody").innerHTML = "";
-  // build a new list
-  students.forEach(displayStudent);
-  // call the function which is filtering
-  // compareName(displayAnimal);
-};
+  document.querySelector("tbody").innerHTML = "";
+  students.forEach((student) => displayStudent(student));
+}
 
 function displayStudent(student) {
-  // create clone
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
-  // let startButtons = document.querySelectorAll("[data-field='inquisitorial']").forEach((button) => button.addEventListener("click", selectInquisitorial));
-
-  // set clone data
-
-  clone.querySelector("[data-field=firstname]").textContent = student.firstname;
-  clone.querySelector("[data-field=lastname]").textContent = student.lastname;
+  // DISPLAYING NAMES
+  clone.querySelector("[data-field=firstname]").textContent = student.firstName + " " + student.nickName + " " + student.middleName;
+  clone.querySelector("[data-field=lastname]").textContent = student.lastName;
   clone.querySelector("[data-field=house]").textContent = student.house;
+
+  // INQUISITORIAL SQUARD
   if (student.inquisitorial === true) {
     clone.querySelector("[data-field=inquisitorial]").textContent = "⭐";
   } else {
@@ -290,35 +169,125 @@ function displayStudent(student) {
     buildList();
   }
 
-  // prefect
+//---------- THE PREFECT SITUATIONEN ----------
   clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
-  function clickPrefect(){
-    if(student.prefect === true){
+  function clickPrefect() {
+    console.log(student);
+    if (student.prefect === true) {
       student.prefect = false;
     } else {
       tryToMakePrefect(student);
     }
     buildList();
   }
-  
 
-  document.querySelector("#list tbody").appendChild(clone);
+  document.querySelector("tbody").appendChild(clone);
 }
 
+//---------- THE BUILDING LIST SITUATIONEN ----------
 function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
 
   displayList(sortedList);
 }
+//---------- THE FILTER SITUATIONEN ----------
+function filterList(filteredList) {
+  if (settings.filterBy === "gryffindor") {
+    filteredList = allStudents.filter(filterGryffindor);
+  } else if (settings.filterBy === "slytherin") {
+    filteredList = allStudents.filter(filterSlytherin);
+  } else if (settings.filterBy === "hufflepuff") {
+    filteredList = allStudents.filter(filterHufflepuff);
+  } else if (settings.filterBy === "ravenclaw") {
+    filteredList = allStudents.filter(filterRavenclaw);
+  } else if (settings.filterBy === "boys") {
+    filteredList = allStudents.filter(filterBoys);
+  } else if (settings.filterBy === "girls") {
+    filteredList = allStudents.filter(filterGirls);
+  }
+  return filteredList;
+}
+function selectFilter(event) {
+  const filter = event.target.dataset.filter;
+  // console.log(filter);
+  setFilter(filter);
+}
+function setFilter(filter) {
+  settings.filterBy = filter;
+  buildList();
+}
+function filterGryffindor(student) {
+  return student.house === "Gryffindor";
+}
+function filterSlytherin(student) {
+  return student.house === "Slytherin";
+}
+function filterHufflepuff(student) {
+  return student.house === "Hufflepuff";
+}
+function filterRavenclaw(student) {
+  return student.house === "Ravenclaw";
+}
+function filterBoys(student) {
+  return student.gender === "Boy";
+}
+function filterGirls(student) {
+  return student.gender === "Girl";
+}
 
+//---------- THE SORTING SITUATIONEN ----------
+function selectSort(event) {
+  const sortBy = event.target.dataset.sort;
+  const sortDir = event.target.dataset.sortDirection;
+
+  // find old sorting element
+  const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
+  oldElement.classList.remove("sortby");
+
+  // show arrow and indicate whats sorting / add class to active sort
+  event.target.classList.add("sortby");
+
+  // toogle the direction
+  if (sortDir === "asc") {
+    event.target.dataset.sortDirection = "desc";
+  } else {
+    event.target.dataset.sortDirection = "asc";
+  }
+  // console.log(`user selected ${sortBy} - ${sortDir}`);
+  setSort(sortBy, sortDir);
+}
+function setSort(sortBy, sortDir) {
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+  buildList();
+}
+function sortList(sortedList) {
+  let direction = 1;
+  if (settings.sortDir === "desc") {
+    direction = -1;
+  } else {
+  }
+
+  sortedList = sortedList.sort(sortByProperty);
+
+  function sortByProperty(a, b) {
+    if (a[settings.sortBy] < b[settings.sortBy]) {
+      return -1 * direction;
+    } else {
+      return 1 * direction;
+    }
+  }
+  return sortedList;
+}
+
+
+//---------- THE TOGGLE SITUATIONEN ----------
 function tryToMakePrefect(selectedStudent){
   const prefects = allStudents.filter(student => student.prefect);
-  
-
   const numberOfPrefect = prefects.length;
-  const other = prefects.filter(student => student.house === selectedStudent.house).shift();
+  const other = prefects.filter((student) => student.house === selectedStudent.house).shift();
 
   if(other !== undefined){
     console.log("There can only be one prefect of each house!");
@@ -390,7 +359,7 @@ function tryToMakePrefect(selectedStudent){
     }
     }
 
-  function removePrefect(prefectAnimal){
+  function removePrefect(prefectStudent){
     student.prefect = false;
 
   }
