@@ -15,12 +15,15 @@ FILTER ON STATUS AND BLOOD:
 - popup button working - DONE 
 - popup styling 
 - popup load in data - DONE
-- popup load in image - DONE - expect justin and leanne who doesnt have photos - done
-- popup photos padma, partavi
+- popup load in image - DONE - expect leanne who doesnt have photos - done
+- popup photos padma, partavi, justin
 - 
 
 PREFECT: 
 - Working on two student from each house 
+
+
+
 
 HackTheSystem: 
 add one flag to your own name. student object to your array

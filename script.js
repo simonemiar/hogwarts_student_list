@@ -24,7 +24,6 @@ function registerButtons() {
     document.querySelector("#search").addEventListener("input", searchFieldInput);
 }
   
-  
 // LOADING STUDENTS
 async function loadStudents() {
     console.log("loading students")
@@ -62,7 +61,6 @@ function preapareObject(object) {
     nickName: "",
     image: "",
     house: "",
-    
   };
   // create a objects from a prototype
   const student = Object.create(Student);
@@ -374,6 +372,21 @@ function showdetails(studentDetails) {
   document.querySelector(".studentImage").src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
   document.querySelector(".houseCrest").src = `images/crest/${studentDetails.house}.png`;
 
+  switch(studentDetails.house) {
+    case "Gryffindor":
+      document.querySelector("#backgroundcolor").style.backgroundColor = "red";
+      break;
+    case "Slytherin":
+      document.querySelector("#backgroundcolor").style.backgroundColor = "green";
+      break;
+    case "Hufflepuff":
+      document.querySelector("#backgroundcolor").style.backgroundColor = "blue";
+      break;
+    case "Ravenclaw":
+      document.querySelector("#backgroundcolor").style.backgroundColor = "black";
+      break;
+
+  }
   // CLICK EXPEL STUDENT BUTTON HERE
   popup.querySelector(".expelledBtn").addEventListener("click", expelledStudent);
 

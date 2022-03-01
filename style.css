@@ -111,15 +111,19 @@
   overflow: none;
 }
 
+#popup .backgroundcolor{
+  height: 40vw;
+  width: 40vw;
+}
+
 #popup article {
   width: 40vw;
   height: 20vw;
   display: flex;
   flex-direction: column;
   padding: 50px 0px 50px 0px;
-  background-color:white;
   cursor: default;
-  color: rgb(0, 0, 0);
+  color: white;
 }
 
 #popup article p {
