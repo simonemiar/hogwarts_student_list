@@ -111,12 +111,13 @@ function preapareObject(object) {
   student.gender = originalGender;
   student.gender = student.gender.substring(0, 1).toUpperCase() + student.gender.substring(1).toLowerCase();
 
-
+  // calling the function deciding the blood 
   student.bloodType = whichBloodType(student);
 
   return student;
 }
 
+// FUNCTION DECIDING ON THE BLOODTYPE
 function whichBloodType(student){
   console.log("hello blood");
   if (allBloodtype.pure.indexOf(student.lastName) > -1) {
@@ -292,62 +293,28 @@ function sortList(sortedList) {
 
 
 function tryToMakePrefect(selectedStudent){
-  const prefects = allStudents.filter(student => student.prefect);
-  const numberOfPrefect = prefects.length;
-  const other = prefects.filter((student) => student.house === selectedStudent.house).shift();
+  const prefects = allStudents.filter((student) => student.prefect && student.house === selectedStudent.house);
+  const numberOfPrefects = prefects.length;
 
-  if(other !== undefined){
-    console.log("There can only be one prefect of each house!");
-    removeOther(other);
-  } else if (numberOfPrefect >= 2){
-    console.log("There can only be two prefects")
+  if (numberOfPrefects >= 2) {
+    console.log("WARNING! there can only be two prefects from each house");
     removeAorB(prefects[0], prefects[1]);
   } else {
     makePrefect(selectedStudent);
   }
 
-  function removeOther(other){
-    // ask the user to ignore, or remove "other"
-    document.querySelector("#remove_other").classList.remove("hide");
-    document.querySelector("#remove_other .closebutton").addEventListener("click", closeDialog);
-    document.querySelector("#remove_other #removeother").addEventListener("click", clickRemoveOther);
-
-    // Show names on other
-    document.querySelector("#remove_other [data-field=otherprefect]").textContent = other.firstname;
-    
-      // if ignore - do nothing
-    function closeDialog(){
-      document.querySelector("#remove_other").classList.add("hide");
-      document.querySelector("#remove_other .closebutton").removeEventListener("click", closeDialog);
-      document.querySelector("#remove_other #removeother").removeEventListener("click", clickRemoveOther);
-    }
-
-    function clickRemoveOther(){
-    removePrefect(other);
-    makePrefect(selectedStudent);
-    buildList();
-    closeDialog();
-    }
-
-    // if remove other:
-    removePrefect(other);
-    makePrefect(selectedStudent);
-
-  }
-
-  function removeAorB(prefectA, prefectB){
-    // ask the user to ignore, or remove A or B
+  function removeAorB(prefectA, prefectB) {
     document.querySelector("#remove_aorb").classList.remove("hide");
     document.querySelector("#remove_aorb .closebutton").addEventListener("click", closeDialog);
     document.querySelector("#remove_aorb #removea").addEventListener("click", clickRemoveA);
     document.querySelector("#remove_aorb #removeb").addEventListener("click", clickRemoveB);
-    
-    //show names on buttons
-    document.querySelector("#remove_aorb [data-field=prefectA]").textContent = prefectA.firstname;
-    document.querySelector("#remove_aorb [data-field=prefectB]").textContent = prefectB.firstname;
 
-    // if ignore - do nothing
-    function closeDialog(){
+    document.querySelector("#remove_aorb [data-field=prefectA]").textContent = prefectA.firstName;
+    document.querySelector("#remove_aorb [data-field=prefectB]").textContent = prefectB.firstName;
+
+
+     // if ignore - do nothing
+    function closeDialog() {
       document.querySelector("#remove_aorb").classList.add("hide");
       document.querySelector("#remove_aorb .closebutton").removeEventListener("click", closeDialog);
       document.querySelector("#remove_aorb #removea").removeEventListener("click", clickRemoveA);
@@ -355,23 +322,26 @@ function tryToMakePrefect(selectedStudent){
     }
 
     // if removeA: 
-    function clickRemoveA(){
+    function clickRemoveA() {
       removePrefect(prefectA);
       makePrefect(selectedStudent);
+      buildList();
+      closeDialog();
     }
-
     // if removeB: 
-    function clickRemoveB(){
+    function clickRemoveB() {
       removePrefect(prefectB);
       makePrefect(selectedStudent);
+      buildList();
+      closeDialog();
     }
-    }
-
-  function removePrefect(prefectStudent){
-    student.prefect = false;
-
   }
-  function makePrefect(student){
+
+  function removePrefect(student) {
+    student.prefect = false;
+  }
+
+  function makePrefect(student) {
     student.prefect = true;
   }
 }

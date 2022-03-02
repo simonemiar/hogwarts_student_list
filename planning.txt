@@ -6,18 +6,20 @@ SEARCH:
 
 POPUP:
 - popup button working - DONE 
-- popup styling 
-- popup load in data 
-- popup load in image 
-- 
-
-FILTER ON STATUS AND BLOOD:
-- popup button working - DONE 
-- popup styling 
+- popup styling - 
 - popup load in data - DONE
 - popup load in image - DONE - expect leanne who doesnt have photos - DONE
-- popup photos padma, partavi, justin 
-- 
+- popup photos padma, partavi, justin - DONE
+
+FILTER ON STATUS AND BLOOD:
+- load the blood array - DONE
+- connect to student array - DONE
+- display in popup - DONE
+- filter buttons working 
+
+EXPELLED STUDENTS
+- push student to expelled array 
+- expelled student filter button 
 
 PREFECT: 
 - Working on two student from each house  
@@ -25,6 +27,8 @@ PREFECT:
 DISPLAY NUMBERS:
 - Creating dynamic numbers 
 
+INQUISITORIAL SQUARD 
+- working students from slytherin or pureblood 
 
 
 HackTheSystem: 
@@ -34,4 +38,4 @@ use push to add yourself as a student
 the system needs to know its hacked: sovle this by a global flag that says system is hacked = true 
 inquisitorial squard: when button clicked - if flag is up, then we add timer that removes the inquisitorial property of object and turn it into false 
 the bloodstatus is no longer trustworthy: iterate throught the whole bloodstatus by a loop, if pure blood we make a math random from an array and index of array 
-
+- Push yourself to the system
