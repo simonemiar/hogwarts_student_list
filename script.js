@@ -360,7 +360,7 @@ function tryToMakePrefect(selectedStudent){
   }
 }
 
-// OPENING THE POPUP DETAILS
+// OPENING THE POPUP DETAILS AND DISPLAYING THE INFORMATION
 function showdetails(studentDetails) {
   console.log("detaljer");
   document.querySelector("#popup").classList.remove("hide")
@@ -369,8 +369,15 @@ function showdetails(studentDetails) {
   document.querySelector("#popup .Middlename").textContent = "Middlename: " + studentDetails.middleName;
   document.querySelector("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
   document.querySelector("#popup .House").textContent = "House: " + studentDetails.house;
-  document.querySelector(".studentImage").src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
   document.querySelector(".houseCrest").src = `images/crest/${studentDetails.house}.png`;
+  document.querySelector(".studentImage").src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
+  if (studentDetails.lastName === "Patil") {
+    document.querySelector(".studentImage").src = `images/${studentDetails.lastName.toLowerCase()}_${studentDetails.firstName.toLowerCase()}.png`;
+  } else {
+    document.querySelector(".studentImage").src = `images/${studentDetails.lastName
+      .substring(studentDetails.lastName.lastIndexOf(""), studentDetails.lastName.indexOf("-") + 1)
+      .toLowerCase()}_${studentDetails.firstName.substring(0, 1).toLowerCase()}.png`;
+  }
 
   switch(studentDetails.house) {
     case "Gryffindor":

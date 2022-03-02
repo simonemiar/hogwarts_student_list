@@ -1,7 +1,7 @@
 01.03.2022 TO DO TO DAY: 
 
 SEARCH:
-- Insert search in displayStudent - done
+- Insert search in displayStudent - DONE
 - Insert functionality - DONE
 
 POPUP:
@@ -15,13 +15,15 @@ FILTER ON STATUS AND BLOOD:
 - popup button working - DONE 
 - popup styling 
 - popup load in data - DONE
-- popup load in image - DONE - expect leanne who doesnt have photos - done
-- popup photos padma, partavi, justin
+- popup load in image - DONE - expect leanne who doesnt have photos - DONE
+- popup photos padma, partavi, justin 
 - 
 
 PREFECT: 
-- Working on two student from each house 
+- Working on two student from each house  
 
+DISPLAY NUMBERS:
+- Creating dynamic numbers 
 
 
 

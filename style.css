@@ -71,8 +71,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vw;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, .6);
     display: flex;
     justify-content: center;
@@ -111,10 +111,6 @@
   overflow: none;
 }
 
-#popup .backgroundcolor{
-  height: 40vw;
-  width: 40vw;
-}
 
 #popup article {
   width: 40vw;
@@ -130,6 +126,9 @@
   margin: 2px;
 }
 
+#popup article img {
+  width: 40%;
+}
 
 #popup .popupbtn {
   border: 1px solid black;
