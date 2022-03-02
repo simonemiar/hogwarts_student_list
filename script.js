@@ -3,6 +3,7 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
+let allBloodtype = [];
 
 const settings = {
   filterBy: "all",
@@ -10,11 +11,11 @@ const settings = {
   sortDir: "asc",
 };
 
-function start() {
+async function start() {
     console.log("ready");
     registerButtons();
-    loadFamilies();
-    loadStudents();
+    await loadBlood();
+    await loadStudents();
 }
 
 // Adding eventlisteners on buttons
@@ -29,18 +30,19 @@ async function loadStudents() {
     console.log("loading students")
     const url = "https://petlatkea.dk/2021/hogwarts/students.json";
     const data = await fetch(url);
-    const students = await data.json();
+    const student = await data.json();
 
     // when loaded, prepare data objects
-    prepareObjects(students);
+    prepareObjects(student);
 };
 
 // LOADING FAMILIES
-async function loadFamilies() {
+async function loadBlood() {
     console.log("loading families")
     const url2 = "https://petlatkea.dk/2021/hogwarts/families.json";
     const data = await fetch(url2);
-    const familie = await data.json();
+    const bloodtype = await data.json();
+    allBloodtype = bloodtype;
 
 };
 
@@ -61,6 +63,7 @@ function preapareObject(object) {
     nickName: "",
     image: "",
     house: "",
+    bloodType: "",
   };
   // create a objects from a prototype
   const student = Object.create(Student);
@@ -108,8 +111,21 @@ function preapareObject(object) {
   student.gender = originalGender;
   student.gender = student.gender.substring(0, 1).toUpperCase() + student.gender.substring(1).toLowerCase();
 
-  // console.table(student);
+
+  student.bloodType = whichBloodType(student);
+
   return student;
+}
+
+function whichBloodType(student){
+  console.log("hello blood");
+  if (allBloodtype.pure.indexOf(student.lastName) > -1) {
+    return "pure";
+  } else if (allBloodtype.half.indexOf(student.lastName) > -1){
+    return "halfblood";
+  } else {
+    return "muggle";
+  }
 }
 
 
@@ -369,7 +385,9 @@ function showdetails(studentDetails) {
   document.querySelector("#popup .Middlename").textContent = "Middlename: " + studentDetails.middleName;
   document.querySelector("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
   document.querySelector("#popup .House").textContent = "House: " + studentDetails.house;
+  document.querySelector("#popup .Bloodstatus").textContent = "House: " + studentDetails.bloodType;
   document.querySelector(".houseCrest").src = `images/crest/${studentDetails.house}.png`;
+  // document.querySelector(".studentImage").src = `images/${generateImgName()}.png`
   document.querySelector(".studentImage").src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
   if (studentDetails.lastName === "Patil") {
     document.querySelector(".studentImage").src = `images/${studentDetails.lastName.toLowerCase()}_${studentDetails.firstName.toLowerCase()}.png`;
