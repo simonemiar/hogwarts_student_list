@@ -356,6 +356,7 @@ function showdetails(studentDetails) {
   document.querySelector("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
   document.querySelector("#popup .House").textContent = "House: " + studentDetails.house;
   document.querySelector("#popup .Bloodstatus").textContent = "House: " + studentDetails.bloodType;
+  document.querySelector("#popup .Prefect").textContent = "Prefect: " + studentDetails.prefect;
   document.querySelector(".houseCrest").src = `images/crest/${studentDetails.house}.png`;
   // document.querySelector(".studentImage").src = `images/${generateImgName()}.png`
   document.querySelector(".studentImage").src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
