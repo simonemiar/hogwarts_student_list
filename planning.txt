@@ -1,3 +1,4 @@
+__________________________________________________
 01.03.2022 TO DO TO DAY: 
 
 SEARCH:
@@ -11,18 +12,20 @@ POPUP:
 - popup load in image - DONE - expect leanne who doesnt have photos - DONE
 - popup photos padma, partavi, justin - DONE
 
+
+PREFECT: 
+- Working on two student from each house - DONE
+- Display in popup - DONE
+
+
+__________________________________________________
+02.03.2022 TO DO TO DAY:
+
 FILTER ON STATUS AND BLOOD:
 - load the blood array - DONE
 - connect to student array - DONE
 - display in popup - DONE
 - filter buttons working 
-
-EXPELLED STUDENTS
-- push student to expelled array 
-- expelled student filter button 
-
-PREFECT: 
-- Working on two student from each house  
 
 DISPLAY NUMBERS:
 - Creating dynamic numbers 
@@ -30,6 +33,9 @@ DISPLAY NUMBERS:
 INQUISITORIAL SQUARD 
 - working students from slytherin or pureblood 
 
+EXPELLED STUDENTS
+- push student to expelled array 
+- expelled student filter button 
 
 HackTheSystem: 
 add one flag to your own name. student object to your array

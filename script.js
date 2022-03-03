@@ -55,6 +55,7 @@ function preapareObject(object) {
   //  allStudents.forEach((object) => {
   // Define a template for the data objects
   const Student = {
+    expelled: false,
     inquisitorial: false, 
     prefect: false,
     firstName: "",
@@ -129,7 +130,6 @@ function whichBloodType(student){
   }
 }
 
-
 //---------- THE SEARCH SITUATIONEN ----------
 function searchFieldInput(evt) {
   // write to the list with only those elemnts in the allAnimals array that has properties containing the search frase
@@ -158,7 +158,7 @@ function displayStudent(student) {
   // CLICK READ MORE BUTTON AND POPUP WILL APPEAR 
   clone.querySelector("button#readmore").addEventListener("click", () => showdetails(student));
 
-  // INQUISITORIAL SQUARD
+  // INQUISITORIAL SQUARD // MISSING PURE BLOOD AND SLYTHERIN 
   if (student.inquisitorial === true) {
     clone.querySelector("[data-field=inquisitorial]").textContent = "⭐";
   } else {
@@ -211,10 +211,12 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(filterHufflepuff);
   } else if (settings.filterBy === "ravenclaw") {
     filteredList = allStudents.filter(filterRavenclaw);
-  } else if (settings.filterBy === "boys") {
-    filteredList = allStudents.filter(filterBoys);
-  } else if (settings.filterBy === "girls") {
-    filteredList = allStudents.filter(filterGirls);
+  } else if (settings.filterBy === "pureblood") {
+    filteredList = allStudents.filter(filterPureblood);
+  } else if (settings.filterBy === "halfblood") {
+    filteredList = allStudents.filter(filterHalfblood);
+  } else if (settings.filterBy === "muggle") {
+    filteredList = allStudents.filter(filterMuggle);
   }
   return filteredList;
 }
@@ -239,11 +241,14 @@ function filterHufflepuff(student) {
 function filterRavenclaw(student) {
   return student.house === "Ravenclaw";
 }
-function filterBoys(student) {
-  return student.gender === "Boy";
+function filterPureblood(student) {
+  return student.bloodType === "pure";
 }
-function filterGirls(student) {
-  return student.gender === "Girl";
+function filterHalfblood(student) {
+  return student.bloodType === "halfblood";
+}
+function filterMuggle(student) {
+  return student.bloodType === "muggle";
 }
 
 //---------- THE SORTING SITUATIONEN ----------
@@ -355,10 +360,9 @@ function showdetails(studentDetails) {
   document.querySelector("#popup .Middlename").textContent = "Middlename: " + studentDetails.middleName;
   document.querySelector("#popup .Lastname").textContent = "Lastname: " + studentDetails.lastName;
   document.querySelector("#popup .House").textContent = "House: " + studentDetails.house;
-  document.querySelector("#popup .Bloodstatus").textContent = "House: " + studentDetails.bloodType;
+  document.querySelector("#popup .Bloodstatus").textContent = "Bloodtype: " + studentDetails.bloodType;
   document.querySelector("#popup .Prefect").textContent = "Prefect: " + studentDetails.prefect;
   document.querySelector(".houseCrest").src = `images/crest/${studentDetails.house}.png`;
-  // document.querySelector(".studentImage").src = `images/${generateImgName()}.png`
   document.querySelector(".studentImage").src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
   if (studentDetails.lastName === "Patil") {
     document.querySelector(".studentImage").src = `images/${studentDetails.lastName.toLowerCase()}_${studentDetails.firstName.toLowerCase()}.png`;
@@ -366,7 +370,7 @@ function showdetails(studentDetails) {
     document.querySelector(".studentImage").src = `images/${studentDetails.lastName
       .substring(studentDetails.lastName.lastIndexOf(""), studentDetails.lastName.indexOf("-") + 1)
       .toLowerCase()}_${studentDetails.firstName.substring(0, 1).toLowerCase()}.png`;
-  }
+  };
 
   switch(studentDetails.house) {
     case "Gryffindor":
