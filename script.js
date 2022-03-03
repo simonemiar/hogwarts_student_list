@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", start);
 
 let allStudents = [];
 let allBloodtype = [];
+let allExpelled = [];
 
 const settings = {
   filterBy: "all",
@@ -120,7 +121,6 @@ function preapareObject(object) {
 
 // FUNCTION DECIDING ON THE BLOODTYPE
 function whichBloodType(student){
-  console.log("hello blood");
   if (allBloodtype.pure.indexOf(student.lastName) > -1) {
     return "pure";
   } else if (allBloodtype.half.indexOf(student.lastName) > -1){
@@ -158,7 +158,7 @@ function displayStudent(student) {
   // CLICK READ MORE BUTTON AND POPUP WILL APPEAR 
   clone.querySelector("button#readmore").addEventListener("click", () => showdetails(student));
 
-//---------- THE INQUISITORIAL SITUATIONEN ---------- // MISSING PURE BLOOD AND SLYTHERIN 
+//---------- THE INQUISITORIAL SITUATIONEN ---------- //
   if (student.inquisitorial === true) {
     clone.querySelector("[data-field=inquisitorial]").textContent = "⭐";
   } else {
@@ -221,6 +221,8 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(filterHalfblood);
   } else if (settings.filterBy === "muggle") {
     filteredList = allStudents.filter(filterMuggle);
+  } else if (settings.filterBy === "expelled") {
+    filteredList = allExpelled;
   } 
   return filteredList;
 }
@@ -253,6 +255,9 @@ function filterHalfblood(student) {
 }
 function filterMuggle(student) {
   return student.bloodType === "muggle";
+}
+function filterExpelled(student) {
+  return student.expelled === "expelled";
 }
 
 
@@ -393,7 +398,20 @@ function showdetails(studentDetails) {
 
   }
   // CLICK EXPEL STUDENT BUTTON HERE
-  popup.querySelector(".expelledBtn").addEventListener("click", expelledStudent);
+  document.querySelector(".expelledBtn").addEventListener("click", expelledStudent);
+ 
+    //---------- THE EXPEL STUDENT SITUATION ----------   
+  function expelledStudent(){
+    document.querySelector(".expelledBtn").removeEventListener("click", expelledStudent);
+    // splicing the student from the array with indexOf // 
+    const expelSplice = allStudents.splice(allStudents.indexOf(studentDetails), 1)[0];
+    
+    console.log(expelSplice)
+    expelSplice.expelled = true;
+    allExpelled.push(expelSplice);
+    buildList();
+    closePopup();
+}
 
 }
 
@@ -404,7 +422,11 @@ function closePopup() {
   popup.classList.add("hide")
 }
 
-//---------- THE EXPEL STUDENT SITUATION ----------   
-function expelledStudent(){
-  console.log("expelled works")
-}
+
+
+
+
+
+
+
+

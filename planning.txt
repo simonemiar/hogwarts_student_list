@@ -37,11 +37,11 @@ DISPLAY NUMBERS:
 - Creating dynamic numbers 
 
 INQUISITORIAL SQUARD 
-- working students from slytherin or pureblood 
+- working students from slytherin or pureblood - DONE 
 
 EXPELLED STUDENTS
-- push student to expelled array 
-- expelled student filter button 
+- push student to expelled array -  
+- expelled student filter button - 
 
 HackTheSystem: 
 add one flag to your own name. student object to your array
