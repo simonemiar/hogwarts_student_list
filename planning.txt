@@ -13,10 +13,6 @@ POPUP:
 - popup photos padma, partavi, justin - DONE
 
 
-PREFECT: 
-- Working on two student from each house - DONE
-- Display in popup - DONE
-
 
 __________________________________________________
 02.03.2022 TO DO TO DAY:
@@ -25,7 +21,17 @@ FILTER ON STATUS AND BLOOD:
 - load the blood array - DONE
 - connect to student array - DONE
 - display in popup - DONE
-- filter buttons working 
+
+PREFECT: 
+- Working on two student from each house - DONE
+- Display in popup - DONE
+
+
+__________________________________________________
+03.03.2022 TO DO TO DAY:
+
+FILTER ON STATUS AND BLOOD:
+- filter buttons working - DONE
 
 DISPLAY NUMBERS:
 - Creating dynamic numbers 

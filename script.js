@@ -158,7 +158,7 @@ function displayStudent(student) {
   // CLICK READ MORE BUTTON AND POPUP WILL APPEAR 
   clone.querySelector("button#readmore").addEventListener("click", () => showdetails(student));
 
-  // INQUISITORIAL SQUARD // MISSING PURE BLOOD AND SLYTHERIN 
+//---------- THE INQUISITORIAL SITUATIONEN ---------- // MISSING PURE BLOOD AND SLYTHERIN 
   if (student.inquisitorial === true) {
     clone.querySelector("[data-field=inquisitorial]").textContent = "⭐";
   } else {
@@ -170,12 +170,16 @@ function displayStudent(student) {
   // append clone to list
   function clickInquisitorial() {
     // console.log("inquisitorial clicked");
-    if (student.inquisitorial === true ) {
-      student.inquisitorial = false;
+    if(student.bloodType === "pure" || student.house === "slytherin"){
+      if (student.inquisitorial === true ) {
+        student.inquisitorial = false;
+      } else {
+        student.inquisitorial = true;
+      }
+      buildList();
     } else {
-      student.inquisitorial = true;
+      alert("Only students from Slytherin or Pure blood can join the inquisitorial squard");
     }
-    buildList();
   }
 
 //---------- THE PREFECT SITUATIONEN ----------
@@ -217,7 +221,7 @@ function filterList(filteredList) {
     filteredList = allStudents.filter(filterHalfblood);
   } else if (settings.filterBy === "muggle") {
     filteredList = allStudents.filter(filterMuggle);
-  }
+  } 
   return filteredList;
 }
 function selectFilter(event) {
@@ -250,6 +254,7 @@ function filterHalfblood(student) {
 function filterMuggle(student) {
   return student.bloodType === "muggle";
 }
+
 
 //---------- THE SORTING SITUATIONEN ----------
 function selectSort(event) {
