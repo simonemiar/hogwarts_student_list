@@ -136,7 +136,7 @@ function searchFieldInput(evt) {
   displayList(
     allStudents.filter((elm) => {
       // comparing in uppercase so that m is the same as M
-      return elm.firstName.toUpperCase().includes(evt.target.value.toUpperCase()) || elm.lastName.toUpperCase().includes(evt.target.value.toUpperCase()) || elm.house.toUpperCase().includes(evt.target.value.toUpperCase());
+      return elm.firstName.toUpperCase().includes(evt.target.value.toUpperCase()) || elm.lastName.toUpperCase().includes(evt.target.value.toUpperCase());
     })
   );
 }
@@ -405,22 +405,19 @@ function showdetails(studentDetails) {
     document.querySelector(".expelledBtn").removeEventListener("click", expelledStudent);
     // splicing the student from the array with indexOf // 
     const expelSplice = allStudents.splice(allStudents.indexOf(studentDetails), 1)[0];
-    
-    console.log(expelSplice)
     expelSplice.expelled = true;
     allExpelled.push(expelSplice);
     buildList();
     closePopup();
+  }
+    // CLOSING THE POPUP DETAILS
+  document.querySelector("#popup button").addEventListener("click", closePopup); 
+  function closePopup() {
+    // document.querySelector("#popup").style.display = "none";
+    popup.classList.add("hide")
+  }   
 }
 
-}
-
-// CLOSING THE POPUP DETAILS
-document.querySelector("#popup button").addEventListener("click", closePopup); 
-function closePopup() {
-  // document.querySelector("#popup").style.display = "none";
-  popup.classList.add("hide")
-}
 
 
 
