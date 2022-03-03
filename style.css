@@ -135,3 +135,23 @@
   background-color: white;
   color: black;
 }
+
+/* DISABLED  */
+.disabled {
+  background-color: dimgray;
+  cursor: help;
+}
+
+/* displaying numbers */
+.displaynumber {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  
+}
+
+.number_of_students #thecontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

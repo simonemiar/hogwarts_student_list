@@ -204,6 +204,7 @@ function buildList() {
   const sortedList = sortList(currentList);
 
   displayList(sortedList);
+  listInformation();
 }
 //---------- THE FILTER SITUATIONEN ----------
 function filterList(filteredList) {
@@ -372,6 +373,8 @@ function showdetails(studentDetails) {
   document.querySelector("#popup .House").textContent = "House: " + studentDetails.house;
   document.querySelector("#popup .Bloodstatus").textContent = "Bloodtype: " + studentDetails.bloodType;
   document.querySelector("#popup .Prefect").textContent = "Prefect: " + studentDetails.prefect;
+  document.querySelector("#popup .Expelled").textContent = "Expelled: " + studentDetails.expelled;
+  document.querySelector("#popup .Inquisquard").textContent = "Inquisquard: " + studentDetails.inquisitorial;
   document.querySelector(".houseCrest").src = `images/crest/${studentDetails.house}.png`;
   document.querySelector(".studentImage").src = `images/${studentDetails.lastName}_${studentDetails.firstName[0]}.png`;
   if (studentDetails.lastName === "Patil") {
@@ -417,6 +420,20 @@ function showdetails(studentDetails) {
     popup.classList.add("hide")
   }   
 }
+
+function listInformation() {
+  console.log("displayListInformation");
+  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT
+  document.querySelector(".gryff_number").textContent = `Gryffindor: ${allStudents.filter((student) => student.house === "gryffindor").length}`;
+  document.querySelector(".slyth_number").textContent = `Slytherin: ${allStudents.filter((student) => student.house === "slytherin").length}`;
+  document.querySelector(".huff_number").textContent = `Hufflepuff: ${allStudents.filter((student) => student.house === "hufflepuff").length}`;
+  document.querySelector(".raven_number").textContent = `Ravenclaw: ${allStudents.filter((student) => student.house === "ravenclaw").length}`;
+  document.querySelector(".expelled_number").textContent = `Expelled: ${allExpelled.length}`;
+  document.querySelector(".nonexpelled_number").textContent = `Nonexpelled: ${allStudents.length}`;
+    
+    
+}
+
 
 
 

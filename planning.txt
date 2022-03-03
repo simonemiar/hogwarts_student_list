@@ -33,15 +33,15 @@ __________________________________________________
 FILTER ON STATUS AND BLOOD:
 - filter buttons working - DONE
 
-DISPLAY NUMBERS:
-- Creating dynamic numbers 
-
 INQUISITORIAL SQUARD 
 - working students from slytherin or pureblood - DONE 
 
 EXPELLED STUDENTS
-- push student to expelled array -  
-- expelled student filter button - 
+- push student to expelled array -  DONE
+- expelled student filter button - DONE
+
+DISPLAY NUMBERS:
+- Creating dynamic numbers 
 
 HackTheSystem: 
 add one flag to your own name. student object to your array
