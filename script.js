@@ -424,10 +424,10 @@ function showdetails(studentDetails) {
 function listInformation() {
   console.log("displayListInformation");
   // THE DISPLAY INFORMATION ON NUMBER OF STUDENT
-  document.querySelector(".gryff_number").textContent = `Gryffindor: ${allStudents.filter((student) => student.house === "gryffindor").length}`;
-  document.querySelector(".slyth_number").textContent = `Slytherin: ${allStudents.filter((student) => student.house === "slytherin").length}`;
-  document.querySelector(".huff_number").textContent = `Hufflepuff: ${allStudents.filter((student) => student.house === "hufflepuff").length}`;
-  document.querySelector(".raven_number").textContent = `Ravenclaw: ${allStudents.filter((student) => student.house === "ravenclaw").length}`;
+  document.querySelector(".gryff_number").textContent = `Gryffindor: ${allStudents.filter.house === "gryffindor".length}`;
+  document.querySelector(".slyth_number").textContent = `Slytherin: ${allStudents.filter.house === "slytherin".length}`;
+  document.querySelector(".huff_number").textContent = `Hufflepuff: ${allStudents.filter.house === "hufflepuff".length}`;
+  document.querySelector(".raven_number").textContent = `Ravenclaw: ${allStudents.filter.house === "ravenclaw".length}`;
   document.querySelector(".expelled_number").textContent = `Expelled: ${allExpelled.length}`;
   document.querySelector(".nonexpelled_number").textContent = `Nonexpelled: ${allStudents.length}`;
     
