@@ -423,15 +423,14 @@ function showdetails(studentDetails) {
 
 function listInformation() {
   console.log("displayListInformation");
-  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT - NOT WORKING
+  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT 
   document.querySelector(".gryff_number").textContent = `Gryffindor: ${allStudents.filter (student => student.house === "Gryffindor").length}`;
   document.querySelector(".slyth_number").textContent = `Slytherin: ${allStudents.filter (student => student.house === "Slytherin").length}`;
   document.querySelector(".huff_number").textContent = `Hufflepuff: ${allStudents.filter (student => student.house === "Hufflepuff").length}`;
   document.querySelector(".raven_number").textContent = `Ravenclaw: ${allStudents.filter (student => student.house === "Ravenclaw").length}`;
-  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT - WORKING
+  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT
   document.querySelector(".expelled_number").textContent = `Expelled: ${allExpelled.length}`;
   document.querySelector(".nonexpelled_number").textContent = `Nonexpelled: ${allStudents.length}`;  
-  
 }
 
 //---------- THE HACKING SITUATIONEN ----------
