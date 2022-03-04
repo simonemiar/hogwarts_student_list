@@ -423,24 +423,55 @@ function showdetails(studentDetails) {
 
 function listInformation() {
   console.log("displayListInformation");
-  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT
-  document.querySelector(".gryff_number").textContent = `Gryffindor: ${allStudents.filter.house === "gryffindor".length}`;
-  document.querySelector(".slyth_number").textContent = `Slytherin: ${allStudents.filter.house === "slytherin".length}`;
-  document.querySelector(".huff_number").textContent = `Hufflepuff: ${allStudents.filter.house === "hufflepuff".length}`;
-  document.querySelector(".raven_number").textContent = `Ravenclaw: ${allStudents.filter.house === "ravenclaw".length}`;
+  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT - NOT WORKING
+  document.querySelector(".gryff_number").textContent = `Gryffindor: ${allStudents.filter (student => student.house === "Gryffindor").length}`;
+  document.querySelector(".slyth_number").textContent = `Slytherin: ${allStudents.filter (student => student.house === "Slytherin").length}`;
+  document.querySelector(".huff_number").textContent = `Hufflepuff: ${allStudents.filter (student => student.house === "Hufflepuff").length}`;
+  document.querySelector(".raven_number").textContent = `Ravenclaw: ${allStudents.filter (student => student.house === "Ravenclaw").length}`;
+  // THE DISPLAY INFORMATION ON NUMBER OF STUDENT - WORKING
   document.querySelector(".expelled_number").textContent = `Expelled: ${allExpelled.length}`;
-  document.querySelector(".nonexpelled_number").textContent = `Nonexpelled: ${allStudents.length}`;
-    
-    
+  document.querySelector(".nonexpelled_number").textContent = `Nonexpelled: ${allStudents.length}`;  
+  
 }
 
+//---------- THE HACKING SITUATIONEN ----------
+function hackTheSystem() {
+  console.log("hacking");
+  addSimone();
+  randomizeBlood();
+}
+function addSimone() {
+  let me = Object.create(allStudents);
+  me.firstName = "Simone";
+  me.lastName = "Kragh-Jacobsen";
+  me.middleName = "Mia";
+  me.nickName = "russianArmyHater";
+  me.house = "Slytherin";
 
+  allStudents.push(me);
+  buildList();
+}
 
-
-
-
-
-
-
-
-
+function expelSimone() {
+  alert("Sorry, not sorry! One step ahead of you there ;)");
+}
+function randomizeBlood() {
+  allStudents.forEach((student) => {
+    if (student.isHalfBlood === true || student.muggle === true) {
+      student.isHalfBlood = false;
+      student.isMuggle = false;
+      student.isPureBlood = true;
+    } else {
+      let randomBlood = Math.floor(Math.random() * 3);
+      student.isPureBlood = false;
+      if (randomBlood === 0) {
+        student.isPureBlood = true;
+      } else if (randomBlood === 1) {
+        student.isHalfBlood = true;
+      } else {
+        student.isMuggle = true;
+      }
+    }
+    // return student;
+  });
+}

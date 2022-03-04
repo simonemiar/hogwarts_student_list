@@ -9,30 +9,25 @@
   </head>
 
   <body>
+      <h1>HOGWARTS STUDENT LIST</h1>
+
+      
       <section id="content_container">
         <section id="information">
-          <h5 class="number_of_students">OVERVIEW OF STUDENT</h5>
-          <article class="displaynumber">
-            <h5 class="gryff_number"></h5>
-            <h5 class="slyth_number"></h5>
-            <h5 class="huff_number"></h5>
-            <h5 class="raven_number"></h5>
-            <h5 class="expelled_number"></h5>
-            <h5 class="nonexpelled_number"></h5>
-          </article>
-        </section>
-        <h1>HOGWARTS STUDENT LIST</h1>
-  
+        <article class="displaynumber">
+          <h5>TOTAL NUMBER OF STUDENTS</h5>
+          <h5 class="gryff_number"></h5>
+          <h5 class="slyth_number"></h5>
+          <h5 class="huff_number"></h5>
+          <h5 class="raven_number"></h5>
+          <h5 class="expelled_number"></h5>
+          <h5 class="nonexpelled_number"></h5>
+        </article>
+
         <section id="thecontainer">
-          <div class="filter_section">
 
-          <label for="search"><h5>SEARCH:</h5></label>
-            <input 
-            type="text"
-            name="search"
-            id="search"
-            placeholder="search for student">
-
+          
+        
             <h5>FILTER BY HOUSE:</h5>
             <p>
                 <button class="filter" data-action="filter" data-filter="*">Show all students</button>
@@ -53,8 +48,14 @@
                 <button class="filter" data-action="filter" data-filter="muggle">Muggles</button>
             </p>
 
-            
-          </div>
+            <label for="search">Search:</label>
+            <input 
+            type="text"
+            name="search"
+            id="search"
+            placeholder="search for student"
+            >
+
         </section>
 
         <!-- <hr /> -->

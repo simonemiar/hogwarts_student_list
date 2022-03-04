@@ -137,37 +137,8 @@
 }
 
 
-
 /* DISABLED  */
 .disabled {
   background-color: dimgray;
   cursor: help;
-}
-
-#content_container{
-  position: sticky;
-}
-
-/* displaying numbers */
-.displaynumber {
-  display: flex;
-  justify-content: space-evenly; 
-  position: sticky;
-}
-
-.number_of_students {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-#list_section {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-#thecontainer {
-  display: grid;
-  justify-content: center;
 }
