@@ -456,21 +456,20 @@ function expelSimone() {
 }
 function randomizeBlood() {
   allStudents.forEach((student) => {
-    if (student.isHalfBlood === true || student.muggle === true) {
-      student.isHalfBlood = false;
-      student.isMuggle = false;
-      student.isPureBlood = true;
+    if (student.bloodType.pure === true || student.bloodType.muggle === true) {
+      student.bloodType.half = false;
+      student.bloodType.muggle = false;
+      student.bloodType.pure = true;
     } else {
       let randomBlood = Math.floor(Math.random() * 3);
-      student.isPureBlood = false;
+      student.bloodType.pure = false;
       if (randomBlood === 0) {
-        student.isPureBlood = true;
+        student.bloodType.pure = true;
       } else if (randomBlood === 1) {
-        student.isHalfBlood = true;
+        student.bloodType.half = true;
       } else {
-        student.isMuggle = true;
+        student.bloodType.muggle = true;
       }
     }
-    // return student;
   });
 }
