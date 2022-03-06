@@ -1,3 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-text-color: rgb(255, 255, 255);
+}
+
+body {
+  background-image: url("images/background_site.png");
+  background-size: cover;
+  color: white;
+ }
+
+@font-face {
+  font-family: 'seagram_tfbregular';
+  src: url('fonts/seagram_tfb-webfont.woff2') format('woff2'),
+       url('fonts/seagram_tfb-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "seagram_tfbregular", serif;
+  color: --main-text-color;
+  font-size: 400%;
+  margin: 10px 10px 10px 10px;
+}
+
+h5 {
+  padding: 0px 0px 8px 0px;
+}
+
+p {
+  font-family: serif;
+}
+
+#content_container{
+  margin: 10px 10px 10px 10px;
+
+}
+
+#information{
+  margin: 10px 10px 10px 0px;
+}
+
+
+
+  /************ BASED ON ANIMAL BASE **************/
 [data-action] {
     cursor: pointer;
   }
@@ -30,8 +81,8 @@
   }
   
   #list tbody tr:nth-child(odd) td {
-    background-color: rgb(176, 183, 185);
-    border-right: rgb(240, 249, 255) 1px dotted;
+    background-color: --main-text-color;
+    border-right: --main-text-color 1px dotted;
   }
   
   #list tbody tr:nth-child(even) td {
@@ -39,10 +90,11 @@
   }
 
   button {
-    border: 1px solid black;
+    border: --main-text-color;
     padding: 10px 10px 10px 10px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(181, 183, 196);
+    margin: 5px 5px 5px 5px;
+    color: --main-text-color;
+    background-color: rgb(26, 123, 153);
   }
   
   /* ****** STAR ****** */
@@ -80,10 +132,10 @@
   }
   
   #dialog {
-    box-shadow: 1px 1px 10px #333;
     border-radius: 12px;
     padding: 2em;
-    background-color: #e0dbcf;
+    margin: 20px 20px 20px 20px;
+    background-color: rgb(26, 123, 153);
     position: relative;
   }
   
@@ -119,7 +171,7 @@
   flex-direction: column;
   padding: 50px 0px 50px 0px;
   cursor: default;
-  color: white;
+  color: --main-text-color;
 }
 
 #popup article p {
@@ -132,19 +184,13 @@
 
 #popup .popupbtn {
   border: 1px solid black;
-  background-color: white;
+  background-color: --main-text-color;
   color: black;
 }
 
-
-/* DISABLED  */
+  /************ WHEN GREY **************/
 .disabled {
   background-color: dimgray;
   cursor: help;
 }
 
-body {
-  background-image: url("images/background_site.png");
-  background-size: cover;
-  color: white;
- }

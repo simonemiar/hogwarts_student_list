@@ -408,8 +408,10 @@ function showdetails(studentDetails) {
       break;
 
   }
+
   // CLICK EXPEL STUDENT BUTTON HERE
   document.querySelector(".expelledBtn").addEventListener("click", expelledStudent);
+
  
     //---------- THE EXPEL STUDENT SITUATION ----------   
   function expelledStudent(){
