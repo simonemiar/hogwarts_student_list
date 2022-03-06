@@ -7,7 +7,7 @@ SEARCH:
 
 POPUP:
 - popup button working - DONE 
-- popup styling - 
+- popup styling - DONE
 - popup load in data - DONE
 - popup load in image - DONE - expect leanne who doesnt have photos - DONE
 - popup photos padma, partavi, justin - DONE
@@ -41,7 +41,7 @@ EXPELLED STUDENTS
 - expelled student filter button - DONE
 
 DISPLAY NUMBERS:
-- Creating dynamic numbers 
+- Creating dynamic numbers - DONE
 
 HackTheSystem: 
 add one flag to your own name. student object to your array
@@ -51,3 +51,5 @@ the system needs to know its hacked: sovle this by a global flag that says syste
 inquisitorial squard: when button clicked - if flag is up, then we add timer that removes the inquisitorial property of object and turn it into false 
 the bloodstatus is no longer trustworthy: iterate throught the whole bloodstatus by a loop, if pure blood we make a math random from an array and index of array 
 - Push yourself to the system
+
+
