@@ -37,15 +37,21 @@ p {
   font-family: serif;
 }
 
-#content_container{
+#content_container {
   margin: 10px 10px 10px 10px;
 
 }
 
-#information{
+#information {
   margin: 10px 10px 10px 0px;
 }
 
+#search {
+  padding: 10px;
+  padding-left: 10px;
+  width: 100%;
+  font-size: 20px;
+}
 
 
   /************ BASED ON ANIMAL BASE **************/
@@ -153,23 +159,27 @@ p {
   }
 
   /************ POP-UP **************/
-#popup {
+  
+  #backgroundcolor{
+    border: rgb(10, 48, 59) 5px solid;
+    height: 30em;
+    width: 15em;
+  }
+
+
+  #popup {
   position: fixed;
   left: 0;
   top: 0;
-  /* width: 100vw;
-  height: 100vw; */
   background-color: rgba(104, 100, 100, 0.445);
   overflow: none;
 }
 
-
 #popup article {
   width: 40vw;
   height: 20vw;
-  display: flex;
+  display: block;
   flex-direction: column;
-  padding: 50px 0px 50px 0px;
   cursor: default;
   color: --main-text-color;
 }
@@ -194,3 +204,23 @@ p {
   cursor: help;
 }
 
+@media(min-width: 700px) {
+
+  h1{
+    margin: 50px 10px 50px 10px;
+    font-size: 600%;
+  }
+
+  #search {
+    padding: 10px;
+    padding-left: 10px;
+    width: 50%;
+    font-size: 20px;
+  }
+
+  #backgroundcolor{
+    border: rgb(10, 48, 59) 5px solid;
+    height: 40em;
+    width: 50em;
+  }
+}

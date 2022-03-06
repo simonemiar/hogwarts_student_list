@@ -9,11 +9,12 @@
   </head>
 
   <body>
+    <div align="center">
       <h1>Hogwarts Student List </h1>
 
       
       <section id="content_container">
-        <label for="search">SEARCH:</label>
+        <label for="search"></label>
             <input 
             type="text"
             name="search"
@@ -22,7 +23,7 @@
             >
         <section id="information">
         <article class="displaynumber">
-          <h5>TOTAL NUMBER OF STUDENTS</h5>
+          <h4>TOTAL NUMBER OF STUDENTS</h4>
           <h5 class="gryff_number"></h5>
           <h5 class="slyth_number"></h5>
           <h5 class="huff_number"></h5>
@@ -35,7 +36,7 @@
 
           
         
-            <h5>FILTER BY HOUSE:</h5>
+            <h4>FILTER BY HOUSE:</h4>
             <p>
                 <button class="filter" data-action="filter" data-filter="*">Show all students</button>
                 <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
@@ -43,12 +44,12 @@
                 <button class="filter" data-action="filter" data-filter="hufflepuff">Hufflepuff</button>
                 <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
             </p>
-            <h5>FILTER BY STATUS:</h5>
+            <h4>FILTER BY STATUS:</h4>
             <p>
               <button class="filter" data-action="filter" data-filter="expelled">Expelled students</button>
               <button class="filter" data-action="filter" data-filter="nonexpelled">Non Expelled students</button>
             </p>
-            <h5>FILTER BY BLOODSTATUS:</h5>
+            <h4>FILTER BY BLOODSTATUS:</h4>
             <p>
                 <button class="filter" data-action="filter" data-filter="pureblood">Pure blood</button>
                 <button class="filter" data-action="filter" data-filter="halfblood">Half blood</button>
@@ -114,7 +115,8 @@
           <section id="popup" class="modal hide">
             <div id="backgroundcolor">
             <button class="popupbtn">&#x2715</button>
-            <article>
+            
+            <article class="popup_img">
               <img src="" alt="studentImg" class="studentImage">
               <img src="" alt="houseCrest" class="houseCrest">
             </article>
@@ -133,6 +135,7 @@
           </div>
           </section>
       </section>
+    </div>
       <script src="script.js"></script>
   </body>
 </html>
