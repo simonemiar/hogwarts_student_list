@@ -189,6 +189,9 @@ function displayStudent(student) {
     console.log(student);
     if (student.prefect === true) {
       student.prefect = false;
+    } else if (student.expelled === true) {
+      student.prefect = false;
+      alert("Expelled students can't be made prefects")
     } else {
       tryToMakePrefect(student);
     }
@@ -197,6 +200,7 @@ function displayStudent(student) {
   
   document.querySelector("tbody").appendChild(clone);
 }
+
 
 //---------- THE BUILDING LIST SITUATIONEN ----------
 function buildList() {

@@ -142,3 +142,9 @@
   background-color: dimgray;
   cursor: help;
 }
+
+body {
+  background-image: url("images/background_site.png");
+  background-size: cover;
+  color: white;
+ }
