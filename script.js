@@ -173,7 +173,10 @@ function displayStudent(student) {
     if(student.bloodType === "pure" || student.house === "slytherin"){
       if (student.inquisitorial === true ) {
         student.inquisitorial = false;
-      } else {
+      } else if(student.expelled === true ){
+        student.inquisitorial = false;
+        alert("Expelled students can't join the Inquisitorial squad! ")
+      }else {
         student.inquisitorial = true;
       }
       buildList();
@@ -181,6 +184,7 @@ function displayStudent(student) {
       alert("Only students from Slytherin or Pure blood can join the inquisitorial squard");
     }
   }
+
 
 //---------- THE PREFECT SITUATIONEN ----------
   clone.querySelector("[data-field=prefect]").dataset.prefect = student.prefect;
